@@ -64,6 +64,7 @@ public class Principal {
                     break;
                 case 10:
                     contaBancaria.validarCPF(cpf);
+                    break;
                 default:
                     System.out.println("Erro, digite um número do menu de opções");
             }
