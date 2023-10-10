@@ -49,20 +49,27 @@ public class ContaBancaria {
         System.out.println("Seu saldo atual é de R$ " + saldo);
     }
 
+    // Faz uma transferência para outra conta destino
+    // Somente se estiver dentro do horário permitido
+    // E tiver saldo na conta
     public void transferencia(String destino, double valor){
-
+        if(LocalDateTime.now().getHour() >= 8 && LocalDateTime.now().getHour() <= 19){
             if(saldo > valor){
                 this.saldo = saldo - valor;
                 System.out.println("Tranferência para a conta " + destino + " de valor " + valor + " realizada com sucesso");
             } else{
                 System.out.println("Valor insuficiente");
             }
+        } else{
+            System.out.println("Erro, horário de transferência: 08:00 às 19:00");
         }
-
+    }
+    // Verifica o horário atual
     public void verificaHorario(){
         System.out.println("O horário atual é: " + horarioAtual);
     }
 
+    // Mostra as informações pessoais do titular
     public void informacaoPessoal(){
         System.out.println(nome);
         System.out.println(cpf);
@@ -72,12 +79,39 @@ public class ContaBancaria {
         System.out.println(saldo);
     }
 
+    // Altera o endereço, atualizando nas informações pessoais
     public void alterarEndereco(){
         Scanner dados = new Scanner(System.in);
         System.out.println("Digite o seu endereço atual");
         String novoEndereco = dados.nextLine();
         this.endereco = novoEndereco;
 
+    }
+
+    public boolean validarCPF(String cpf){
+        cpf = cpf.replace("\\.", "");
+        cpf = cpf.replaceAll("-", "");
+
+        if(cpf.length() != 11){
+            return false;
+        }
+        // Calcula a soma do primeiro dígito verificador
+        int soma = 0;
+        for(int i = 0; i<9; i++){
+            soma += Integer.parseInt(String.valueOf(cpf.charAt(i))) * (10 - i);
+        }
+        int resto = 11 - (soma % 11);
+        int digito1 = (resto == 10 || resto == 11)? 0 : resto;
+
+        // Calcula o segundo dígito verificador
+        soma = 0;
+        for(int i = 0; i < 10; i++){
+            soma += Integer.parseInt(String.valueOf(cpf.charAt(i))) * (10 - i);
+        }
+        resto = 11 - (soma % 11);
+        int digito2 = (resto == 18 || resto == 11)? 0 : resto;
+
+        return digito1 == Integer.parseInt(String.valueOf(cpf.charAt(9))) && digito2 == Integer.parseInt(String.valueOf(cpf.charAt(10)));
     }
 
     public void fecharConta(){

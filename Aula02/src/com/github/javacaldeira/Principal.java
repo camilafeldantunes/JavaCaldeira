@@ -13,7 +13,7 @@ public class Principal {
         String indentificadorConta = "01";
         String banco = "09";
         String endereco = "Rua tal tal";
-        double saldo = 100;
+        double saldo = 0;
         LocalDateTime horarioAtual = LocalDateTime.now();
 
         ContaBancaria contaBancaria = new ContaBancaria(nome, cpf, indentificadorConta, banco, endereco, saldo, horarioAtual);
@@ -28,6 +28,7 @@ public class Principal {
         System.out.println("07 - Informações Pessoais");
         System.out.println("08 - Alterar endereço");
         System.out.println("09 - Fechar conta");
+        System.out.println("10 - Validar CPF");
         System.out.println("Digite um número do menu de opções ou 0 para sair");
         int numeroEscolhido = menu.nextInt();
 
@@ -61,6 +62,8 @@ public class Principal {
                 case 9:
                     contaBancaria.fecharConta();
                     break;
+                case 10:
+                    contaBancaria.validarCPF(cpf);
                 default:
                     System.out.println("Erro, digite um número do menu de opções");
             }
