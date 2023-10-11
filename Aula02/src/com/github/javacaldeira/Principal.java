@@ -80,6 +80,7 @@ public class Principal {
                     System.out.println("07 - Informações Pessoais");
                     System.out.println("08 - Alterar endereço");
                     System.out.println("09 - Fechar conta");
+                    System.out.println("10 - Validar CPF");
                     System.out.println("Digite um número do menu de opções ou 0 para sair");
                     numeroEscolhido = menu.nextInt();
                 } else{
