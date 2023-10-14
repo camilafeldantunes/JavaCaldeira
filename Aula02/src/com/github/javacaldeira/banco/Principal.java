@@ -1,4 +1,6 @@
-package com.github.javacaldeira;
+package com.github.javacaldeira.banco;
+
+import com.github.javacaldeira.banco.ContaBancaria;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
